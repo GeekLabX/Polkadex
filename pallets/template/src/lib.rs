@@ -255,7 +255,7 @@ impl<T: Trait> Module<T> {
 
         match Self::basic_order_checks(&current_order) {
             Ok(mut orderbook) => {
-                let nonce = Nonce::get(); // To get some kind non user controllable randomness to order id
+                let nonce = Nonce::get(); // To get some kind of system controllable randomness to order id
                 current_order.id = (trading_pair, current_order.trader.clone(), price, quantity, current_order.order_type.clone(), nonce)
                     .using_encoded(<T as frame_system::Trait>::Hashing::hash);
                 Nonce::put(nonce + 1); // TODO: Check might overflow after a long time.
